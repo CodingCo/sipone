@@ -4,8 +4,8 @@
         <div class="col-md-8">
             <h1>First selection round</h1>
             <ul>
-                <li class="lead">Choose two first and two second priorties</li>
-                <li class="lead">Click on a object to move it to your selection area</li>
+                <li class="lead">Choose two first and two second priorities</li>
+                <li class="lead">Click on a object to move it to your selected subjects</li>
             </ul>
         </div>
     </div>
@@ -15,7 +15,8 @@
             <p><b>All subjects</b></p>
 
             <div class="list-group">
-                <a href="" class="list-group-item" ng-repeat="item in subjects">
+                <a href="" class="list-group-item" ng-repeat="item in subjects" ng-show="visible(item)"
+                   ng-click="addItem(item)">
                     <h4 class="list-group-item-heading">{{item}}</h4>
                 </a>
             </div>
@@ -26,25 +27,42 @@
         <div class="col-md-5">
 
             <p class="lead">First priority</p>
+
             <div class="list-group">
-                <a href="" class="list-group-item disabled">
-                    <h4 class="list-group-item-heading">first</h4>
+                <a href="" class="list-group-item list-group-item-success" ng-repeat="item in selectedItems.first">
+                    <h4 class="list-group-item-heading">{{item}}</h4>
                 </a>
-                <a href="" class="list-group-item disabled">
-                    <h4 class="list-group-item-heading">first</h4>
+                <!-- Dummies -->
+                <a href="" class="list-group-item disabled" ng-show="selectedItems.first[0] == undefined">
+                    <h4 class="list-group-item-heading">1st priority</h4>
                 </a>
+                <a href="" class="list-group-item disabled" ng-show="selectedItems.first[1] == undefined">
+                    <h4 class="list-group-item-heading">1st priority</h4>
+                </a>
+                <!-- Dummies end -->
             </div>
             <p class="lead">Second priority</p>
+
             <div class="list-group">
-                <a href="" class="list-group-item disabled">
-                    <h4 class="list-group-item-heading">second</h4>
+                <a href="" class="list-group-item list-group-item-success" ng-repeat="item in selectedItems.second">
+                    <h4 class="list-group-item-heading">{{item}}</h4>
                 </a>
-                <a href="" class="list-group-item disabled">
-                    <h4 class="list-group-item-heading">second</h4>
-                </a>
+
+            <!-- Dummies -->
+            <a href="" class="list-group-item disabled" ng-show="selectedItems.second[0] == undefined">
+                <h4 class="list-group-item-heading">2nd priority</h4>
+            </a>
+            <a href="" class="list-group-item disabled" ng-show="selectedItems.second[1] == undefined">
+                <h4 class="list-group-item-heading">2nd priority</h4>
+            </a>
+            <!-- Dummies end -->
             </div>
-
         </div>
-
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button class=" btn btn-success btn-lg">Submit Chosen subjects</button>
+        </div>
+    </div>
+    <hr/>
 </div>
