@@ -8,17 +8,15 @@
 
     app.config(["$routeProvider", function ($routeProvider) {
 
-        $routeProvider.when("/first", {
-            templateUrl: "",
-            controller: ""
+        $routeProvider.when("/subjectOne", {
+            templateUrl: "SPA/views/subjectOne.html",
+            controller: "FistSelectCtrl"
         }).otherwise({
-            templateUrl:"SPA/views/frontpage.html",
-            controller:"StandardCtrl"
+            templateUrl: "SPA/views/frontpage.html",
+            controller: "StandardCtrl"
         });
 
     }]);
-
-
 })();
 
 

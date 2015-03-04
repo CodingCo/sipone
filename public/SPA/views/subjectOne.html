@@ -1,0 +1,50 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1>First selection round</h1>
+            <ul>
+                <li class="lead">Choose two first and two second priorties</li>
+                <li class="lead">Click on a object to move it to your selection area</li>
+            </ul>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-7">
+            <p><b>All subjects</b></p>
+
+            <div class="list-group">
+                <a href="" class="list-group-item" ng-repeat="item in subjects">
+                    <h4 class="list-group-item-heading">{{item}}</h4>
+                </a>
+            </div>
+
+        </div>
+        <p><b>Your selected subjects</b></p>
+
+        <div class="col-md-5">
+
+            <p class="lead">First priority</p>
+            <div class="list-group">
+                <a href="" class="list-group-item disabled">
+                    <h4 class="list-group-item-heading">first</h4>
+                </a>
+                <a href="" class="list-group-item disabled">
+                    <h4 class="list-group-item-heading">first</h4>
+                </a>
+            </div>
+            <p class="lead">Second priority</p>
+            <div class="list-group">
+                <a href="" class="list-group-item disabled">
+                    <h4 class="list-group-item-heading">second</h4>
+                </a>
+                <a href="" class="list-group-item disabled">
+                    <h4 class="list-group-item-heading">second</h4>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
