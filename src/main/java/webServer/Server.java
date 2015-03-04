@@ -10,6 +10,7 @@ import java.net.InetSocketAddress;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import handlers.FileHandler;
+import handlers.RestHandler;
 import handlers.ServerResponse;
 import java.util.Properties;
 import utility.Utility;
@@ -40,12 +41,16 @@ public class Server {
         server = HttpServer.create(new InetSocketAddress(ip, port), 0);
         // insert createContext paths here
         server.createContext("/", new FileHandler());
-        //server.createContext("/api", new RestHandler());
-        //server.createContext("/public/*", new FileHandler());
+        server.createContext("/api", new RestHandler());
         server.setExecutor(null);
         server.start();
         System.out.println("Server startet on: " + server.getAddress());
 
+    }
+    
+    public void closeHttpServer() {
+        server.stop(2);
+        System.out.println("webserver closed");
     }
 
     private HttpHandler testHandler() {
