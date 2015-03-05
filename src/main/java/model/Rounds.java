@@ -19,7 +19,7 @@ public class Rounds implements Serializable {
     private Long id;
 
     @Column(name = "ELECTIVE_COURSE")
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER) 
     private Collection<ElectiveCourse> electiveCourse;
 
     @Column(name = "ROUND_NUMBER")
