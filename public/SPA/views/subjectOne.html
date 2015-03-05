@@ -29,7 +29,7 @@
             <p class="lead">First priority</p>
 
             <div class="list-group">
-                <a href="" class="list-group-item list-group-item-success" ng-repeat="item in selectedItems.first">
+                <a href="" class="list-group-item list-group-item-success" ng-repeat="item in selectedItems.first" ng-click="removeItem(item)">
                     <h4 class="list-group-item-heading">{{item}}</h4>
                 </a>
                 <!-- Dummies -->
@@ -44,7 +44,7 @@
             <p class="lead">Second priority</p>
 
             <div class="list-group">
-                <a href="" class="list-group-item list-group-item-success" ng-repeat="item in selectedItems.second">
+                <a href="" class="list-group-item list-group-item-success" ng-repeat="item in selectedItems.second" ng-click="removeItem(item)">
                     <h4 class="list-group-item-heading">{{item}}</h4>
                 </a>
 
@@ -61,7 +61,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <button class=" btn btn-success btn-lg">Submit Chosen subjects</button>
+            <button class=" btn btn-success btn-lg" ng-click="submit()">Submit Chosen subjects</button>
         </div>
     </div>
     <hr/>

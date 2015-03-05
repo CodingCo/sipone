@@ -1,8 +1,10 @@
 (function () {
     var app = angular.module('App', [
         'ngRoute',
+        'toastr',
         'App.controllers',
-        'App.directives'
+        'App.directives',
+        'App.factories'
     ]);
 
 

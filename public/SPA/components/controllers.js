@@ -9,7 +9,7 @@
 
     }]);
 
-    app.controller("FistSelectCtrl", ["$scope", function ($scope) {
+    app.controller("FistSelectCtrl", ["$scope", "serverFactory", "toastr", function ($scope, serverFactory, toastr) {
         $scope.subjects = [
             "Ai and algorithms",
             "Arduino & C++",
@@ -37,7 +37,7 @@
 
             if (fLength != 2 || sLength != 2) {
                 var index = $scope.subjects.indexOf(item);
-                var chosenSubject = $scope.subjects.splice(index, 1);
+                var chosenSubject = $scope.subjects.splice(index, 1)[0];
 
                 if (fLength != 2) {
                     $scope.selectedItems.first.push(chosenSubject);
@@ -48,9 +48,25 @@
         };
 
         $scope.removeItem = function (item) {
+            var indexOfObject = "";
+            var objectToRemove = "";
 
+            function remove(field) {
+                indexOfObject = $scope.selectedItems[field].indexOf(item);
+                objectToRemove = $scope.selectedItems[field].splice(indexOfObject, 1)[0];
+                $scope.subjects.push(objectToRemove);
+            }
 
+            if ($scope.selectedItems.first.indexOf(item) != -1) {
+                remove("first");
+            } else if ($scope.selectedItems.second.indexOf(item) != -1) {
+                remove("second");
+            }
         };
+
+        $scope.submit = function () {
+            toastr.success("Submitted");
+        }
 
     }]);
 
