@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import handlers.FileHandler;
+import handlers.SubjectHandler;
 import handlers.ServerResponse;
 import java.util.Properties;
 import utility.Utility;
@@ -20,13 +22,16 @@ public class Server {
     private ServerResponse sr;
     private final Properties property = Utility.initProperties("serverproperties.txt");
 
-    private Gson gson;
+    GsonBuilder gsonBuilder;
+    private Gson transformer;
     private int port;
     private String ip;
 
+    
     // Constructor
     public Server() throws IOException {
-        this.gson = new GsonBuilder().create();
+        gsonBuilder = new GsonBuilder();
+        transformer = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
         // Instantiate handler here >>
         this.sr = new ServerResponse();
     }
@@ -38,11 +43,18 @@ public class Server {
 
         server = HttpServer.create(new InetSocketAddress(ip, port), 0);
         // insert createContext paths here
-        server.createContext("/", testHandler());
+        server.createContext("/", new FileHandler());
+        //server.createContext("/api/submit", new SubmitHandler());
+        server.createContext("/api/subject", new SubjectHandler(transformer, sr));
         server.setExecutor(null);
         server.start();
         System.out.println("Server startet on: " + server.getAddress());
 
+    }
+    
+    public void closeHttpServer() {
+        server.stop(2);
+        System.out.println("webserver closed");
     }
 
     private HttpHandler testHandler() {
