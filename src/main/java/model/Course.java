@@ -20,7 +20,8 @@ public class Course implements Serializable {
     @SequenceGenerator(name = "courseIdGen", sequenceName = "COURSE_SEQ", initialValue = 100000, allocationSize = 1)
     private Long id;
 
-    @Column(name = "Teacher")
+//    @Column(name = "Teacher")
+    @JoinColumn(name = "TEACHER")
     private Teacher teacher;
 
     @Column(name = "COURSE_NAME")

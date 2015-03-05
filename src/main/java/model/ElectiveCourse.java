@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 public class ElectiveCourse implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "electiveCourseIdGen")
     @SequenceGenerator(name = "electiveCourseIdGen", sequenceName = "ELECTIVE_COURSE_SEQ", initialValue = 100000, allocationSize = 1)
@@ -16,32 +16,31 @@ public class ElectiveCourse implements Serializable {
 
     @Column(name = "ELECTIVE_COURSE_NAME")
     private String electiveCourseName;
-    
+
     @Temporal(TemporalType.DATE)
     @Column(name = "CREATION_DATE")
     private Date creationDate;
-    
+
     @Column(name = "NO_OF_VOTES")
     private int noOfVotes;
-    
+
     @Column(name = "DESCRIPTION")
     private String description;
-    
+
     @Column(name = "POOL")
     private String pool;
 
     public ElectiveCourse() {
     }
 
-    public ElectiveCourse(Long id, String electiveCourseName, Date creationDate, int noOfVotes, String description, String pool) {
-        this.id = id;
+    public ElectiveCourse(String electiveCourseName, String description, String pool) {
         this.electiveCourseName = electiveCourseName;
         this.noOfVotes = 1;
         this.description = description;
         this.pool = pool;
         setDate();
     }
-    
+
     private void setDate() {
 
         try {
@@ -53,11 +52,11 @@ public class ElectiveCourse implements Serializable {
         }
 
     }
-    
-    public void voteForCourse(){
+
+    public void voteForCourse() {
         noOfVotes++;
     }
-    
+
     // GETTERS AND SETTERS
     public String getElectiveCourseName() {
         return electiveCourseName;
@@ -69,10 +68,6 @@ public class ElectiveCourse implements Serializable {
 
     public Date getCreationDate() {
         return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
     }
 
     public int getNoOfVotes() {
@@ -99,15 +94,13 @@ public class ElectiveCourse implements Serializable {
         this.pool = pool;
     }
 
-    
-    
     public Long getId() {
         return id;
     }
-    
+
     @Override
     public String toString() {
         return "model.ElectiveCourse[ id=" + id + " ]";
     }
-    
+
 }

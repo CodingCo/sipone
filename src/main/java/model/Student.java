@@ -6,10 +6,12 @@ import javax.persistence.*;
 @Entity
 public class Student extends Person implements Serializable {
 
-    @Column(name = "COURSE_1")
+//    @Column(name = "COURSE_1")
+    @JoinColumn(name = "COURSE_1")
     private Course course1;
     
-    @Column(name = "COURSE_2")
+//    @Column(name = "COURSE_2")
+    @JoinColumn(name = "COURSE_2")
     private Course course2;
     
     public Student() {

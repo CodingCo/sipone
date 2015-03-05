@@ -18,9 +18,8 @@ public class Rounds implements Serializable {
     @SequenceGenerator(name = "roundsIdGen", sequenceName = "ROUDNS_SEQ", initialValue = 100000, allocationSize = 1)
     private Long id;
 
-    @Column(name = "ELECTIVE_COURSE")
-    @OneToMany(fetch = FetchType.EAGER) 
-    private Collection<ElectiveCourse> electiveCourse;
+    @OneToOne
+    private ElectiveCourse course;
 
     @Column(name = "ROUND_NUMBER")
     private int roundNo;
@@ -28,13 +27,9 @@ public class Rounds implements Serializable {
     public Rounds() {
     }
 
-    public Rounds(int roundNo) {
-        this.electiveCourse = new ArrayList();
+    public Rounds(int roundNo, ElectiveCourse elCourse) {
         this.roundNo = roundNo;
-    }
-
-    public void addElectiveCourse(ElectiveCourse course) {
-        electiveCourse.add(course);
+        this.course = elCourse;
     }
 
     public int getRoundNo() {
@@ -43,6 +38,10 @@ public class Rounds implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public ElectiveCourse getElectiveCourse() {
+        return course;
     }
 
     @Override

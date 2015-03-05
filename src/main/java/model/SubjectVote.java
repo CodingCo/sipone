@@ -11,10 +11,10 @@ public class SubjectVote implements Serializable {
     @SequenceGenerator(name = "electiveCourseIdGen", sequenceName = "ELECTIVE_COURSE_SEQ", initialValue = 100000, allocationSize = 1)
     private Long id;
     
-    @Column(name = "STUDENT")
+    @JoinColumn(name = "STUDENT")
     private Student student;
     
-    @Column(name = "ROUND_ID") // What's this?
+    @JoinColumn(name = "ROUND")
     private Rounds round;
 
     public SubjectVote() {

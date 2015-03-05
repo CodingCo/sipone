@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "PERSON_TYPE")
 public class Person implements Serializable {
     
     // cpr, email, name 
