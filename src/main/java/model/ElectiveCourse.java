@@ -30,14 +30,18 @@ public class ElectiveCourse implements Serializable {
     @Column(name = "POOL")
     private String pool;
 
+    @Column(name = "ROUND_NUMBER")
+    private int round;
+
     public ElectiveCourse() {
     }
 
-    public ElectiveCourse(String electiveCourseName, String description, String pool) {
+    public ElectiveCourse(String electiveCourseName, String description, String pool, int roundNumber) {
         this.electiveCourseName = electiveCourseName;
         this.noOfVotes = 1;
         this.description = description;
         this.pool = pool;
+        this.round = roundNumber;
         setDate();
     }
 
@@ -96,6 +100,10 @@ public class ElectiveCourse implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public int getRound() {
+        return round;
     }
 
     @Override

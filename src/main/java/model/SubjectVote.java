@@ -11,26 +11,26 @@ public class SubjectVote implements Serializable {
     @SequenceGenerator(name = "electiveCourseIdGen", sequenceName = "ELECTIVE_COURSE_SEQ", initialValue = 100000, allocationSize = 1)
     private Long id;
     
-    @JoinColumn(name = "STUDENT")
+    @OneToOne
     private Student student;
     
-    @JoinColumn(name = "ROUND")
-    private Rounds round;
+    @OneToOne
+    private ElectiveCourse course;
 
     public SubjectVote() {
     }
     
-    public SubjectVote(Student student, Rounds round) {
+    public SubjectVote(Student student, ElectiveCourse course) {
         this.student = student;
-        this.round = round;
+        this.course = course;
     }
 
     public Student getStudent() {
         return student;
     }
 
-    public Rounds getRounds() {
-        return round;
+    public ElectiveCourse getCourse() {
+        return course;
     }
     
     public Long getId() {
