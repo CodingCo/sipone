@@ -20,6 +20,23 @@
             "Software Architecture"
         ];
 
+
+        function getCourses() {
+
+            serverFactory.getFirstSubjects(function (err, data) {
+                if (err) {
+                    $scope.subjects = ["No elective subjects yet"];
+                    return;
+                }
+
+                for (var i = 0; i < data.length; ++i) {
+                    $scope.subjects.push(data.electiveCourseName);
+                }
+            });
+
+        }
+
+
         $scope.selectedItems = {
             first: [],
             second: []
@@ -33,7 +50,6 @@
         $scope.addItem = function (item) {
             var fLength = $scope.selectedItems.first.length;
             var sLength = $scope.selectedItems.second.length;
-
 
             if (fLength != 2 || sLength != 2) {
                 var index = $scope.subjects.indexOf(item);
