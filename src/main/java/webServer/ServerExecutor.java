@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import model.ElectiveCourse;
 import webInterface.SubjectFacadeIF;
 
 public class ServerExecutor {
@@ -25,15 +24,7 @@ public class ServerExecutor {
 
             // ------------------------------------------------------------------------
             System.out.println("Entering area 51");
-            
-            
-//            em.getTransaction().begin();
-//            em.persist(new ElectiveCourse("C#", "description", "A", 1));
-//            em.getTransaction().commit();
-//            em.close();
-            
-            
-            System.out.println("Leaving area 51");
+
             // ------------------------------------------------------------------------
 
             serverCommands();

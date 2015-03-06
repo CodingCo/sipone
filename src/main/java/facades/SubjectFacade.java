@@ -29,16 +29,28 @@ public class SubjectFacade implements SubjectFacadeIF {
                 courseToReturn.add(course.get(i));
             }
         }
+        System.out.println("Size of courses: " + course.size());
 
         return gson.toJson(courseToReturn);
     }
 
     @Override
     public String submittedFirstElectiveSubjects(String subjectAsJson) {
-        return "{\n"
-                + "  err: true,\n"
-                + "  title: “Not supported yet”\n"
-                + "}";
-    }
+        ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
 
+        try {
+            em.getTransaction().begin();
+            em.persist(courseToCreate);
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            System.err.println("Exception was thrown");
+            return "{\n"
+                    + "  err: true,\n"
+                    + "  title: “Elective course already exists!”\n"
+                    + "}";
+        }
+
+        return gson.toJson(courseToCreate);
+    }
 }
