@@ -5,10 +5,6 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 
-/**
- *
- * @author christophermortensen
- */
 public class SubjectHandler implements HttpHandler {
     
     Gson transformer;

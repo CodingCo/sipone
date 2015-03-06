@@ -1,11 +1,9 @@
 package webInterface;
 
-/**
- *
- * @author ThomasHedegaard
- */
 public interface SubjectFacadeIF {
-    
-    
-    
+
+    public String getFirstElectiveSubjects();
+
+    public String submittedFirstElectiveSubjects(String subjectAsJson);
+
 }
