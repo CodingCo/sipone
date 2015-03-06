@@ -21,6 +21,7 @@ public class ServerExecutor {
             webServer = new Server();
             webServer.start();
             
+            //
             EntityManager manager = Factory.getInstance().getManager();
 
             serverCommands();
