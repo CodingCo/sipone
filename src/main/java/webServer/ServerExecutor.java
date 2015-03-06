@@ -7,10 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author simon
- */
 public class ServerExecutor {
 
     static BufferedReader input;
