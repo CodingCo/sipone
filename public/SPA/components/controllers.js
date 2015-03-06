@@ -10,42 +10,31 @@
     }]);
 
     app.controller("FistSelectCtrl", ["$scope", "serverFactory", "toastr", function ($scope, serverFactory, toastr) {
-        $scope.subjects = [
-            "Ai and algorithms",
-            "Arduino & C++",
-            "C#",
-            "Paskall",
-            "Android",
-            "Game Design",
-            "Software Architecture"
-        ];
-
-
-        function getCourses() {
-
-            serverFactory.getFirstSubjects(function (err, data) {
-                if (err) {
-                    $scope.subjects = ["No elective subjects yet"];
-                    return;
-                }
-
-                for (var i = 0; i < data.length; ++i) {
-                    $scope.subjects.push(data.electiveCourseName);
-                }
-            });
-
-        }
-
-
+        $scope.subjects = [];
         $scope.selectedItems = {
             first: [],
             second: []
         };
 
+        function getCourse() {
+            serverFactory.getFirstSubjects(function (err, data) {
+                if (err) {
+                    $scope.subjects = ["No elective subjects yet"];
+                    return;
+                }
+                $scope.subjects = [];
+                for (var i = 0; i < data.length; ++i) {
+                    $scope.subjects.push(data[i].electiveCourseName);
+                }
+            });
+        }
+
+        getCourse();
+
+
         $scope.visible = function (item) {
             return $scope.subjects.indexOf(item) != -1;
         };
-
 
         $scope.addItem = function (item) {
             var fLength = $scope.selectedItems.first.length;
@@ -91,6 +80,7 @@
                 //});
 
                 toastr.success("Well chosen");
+                getCourse();
                 $scope.selectedItems = {
                     first: [],
                     second: []
