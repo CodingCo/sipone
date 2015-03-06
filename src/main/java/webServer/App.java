@@ -7,7 +7,7 @@ public class App {
         try {
             Server server = new Server();
             server.start();
-            
+
         } catch (Exception ex) {
             System.err.println("Error: " + ex.getMessage());
         }
