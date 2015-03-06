@@ -1,11 +1,15 @@
 package webServer;
 
+import com.google.gson.Gson;
+import facades.SubjectFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import model.ElectiveCourse;
+import webInterface.SubjectFacadeIF;
 
 public class ServerExecutor {
 
@@ -16,9 +20,26 @@ public class ServerExecutor {
         try {
             webServer = new Server();
             webServer.start();
+
+            // ------------------------------------------------------------------------
+            System.out.println("Entering area 51");
+            EntityManager em = Factory.getInstance().getManager(); // manager
+            SubjectFacadeIF facade = new SubjectFacade(new Gson(), em);
+
+            // Methods calls
+            String foo = facade.getFirstElectiveSubjects();
             
-            //
-            EntityManager manager = Factory.getInstance().getManager();
+//            em.getTransaction().begin();
+//            em.persist(new ElectiveCourse("C#", "description", "A", 1));
+//            em.getTransaction().commit();
+//            em.close();
+            
+            
+            System.out.println("------------------> Data: " + foo);
+            
+            
+            System.out.println("Leaving area 51");
+            // ------------------------------------------------------------------------
 
             serverCommands();
         } catch (IOException ex) {
