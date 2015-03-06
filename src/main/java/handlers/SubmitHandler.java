@@ -4,12 +4,18 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import facades.SubjectFacade;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import webInterface.SubjectFacadeIF;
 import webServer.Factory;
 
-public class SubjectHandler implements HttpHandler {
+/**
+ *
+ * @author Robert Elving
+ */
+public class SubmitHandler implements HttpHandler {
 
     SubjectFacadeIF sF;
     Gson transformer;
@@ -19,7 +25,7 @@ public class SubjectHandler implements HttpHandler {
     private String response;
     private int statusCode;
 
-    public SubjectHandler(Gson transformer, ServerResponse sr, SubjectFacadeIF facade) {
+    public SubmitHandler(Gson transformer, ServerResponse sr, SubjectFacadeIF facade) {
         this.transformer = transformer;
         this.sr = sr;
         this.sF = facade;
@@ -35,7 +41,7 @@ public class SubjectHandler implements HttpHandler {
 
         switch (pathName) {
             case "first":
-                handleSubject(he, method);
+                handleSubmit(he, method);
                 break;
             default:
                 sendNotFound();
@@ -49,22 +55,29 @@ public class SubjectHandler implements HttpHandler {
     private void handleSubject(HttpExchange he, String method) throws IOException {
         System.out.println("handleSubject");
         switch (method) {
-            
+
             case "GET":
-                System.out.println("Inside Get");
-                String electiveSubject = this.sF.getFirstElectiveSubjects();
-                System.out.println(electiveSubject
-                );
-                
-                
-                he.sendResponseHeaders(200, electiveSubject.length());
-                try (OutputStream os = he.getResponseBody()) {
-                    os.write(electiveSubject.getBytes());
-                }
-                
+
                 break;
 
             case "POST":
+
+                InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "utf-8");
+                BufferedReader br = new BufferedReader(isr);
+                
+                int b;
+                StringBuilder buf = new StringBuilder(512);
+                while ((b = br.read()) != -1) {
+                    buf.append((char) b);
+                }
+
+                br.close();
+                isr.close();
+
+                String submittedJsonString = buf.toString();
+
+                sF.submittedFirstElectiveSubjects(submittedJsonString);
+
                 break;
 
             case "DELETE":
@@ -85,5 +98,4 @@ public class SubjectHandler implements HttpHandler {
         response = "path not supported!";
         System.out.println("sendNotFound");
     }
-
 }

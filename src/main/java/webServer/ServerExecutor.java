@@ -1,16 +1,15 @@
 package webServer;
 
+import com.google.gson.Gson;
+import facades.SubjectFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import webInterface.SubjectFacadeIF;
 
-/**
- *
- * @author simon
- */
 public class ServerExecutor {
 
     static BufferedReader input;
@@ -18,11 +17,15 @@ public class ServerExecutor {
 
     public static void main(String[] args) {
         try {
-            webServer = new Server();
+            EntityManager em = Factory.getInstance().getManager(); // manager
+             SubjectFacadeIF facade = new SubjectFacade(new Gson(), em);
+            webServer = new Server(facade);
             webServer.start();
-            
-            //
-            EntityManager manager = Factory.getInstance().getManager();
+
+            // ------------------------------------------------------------------------
+            System.out.println("Entering area 51");
+
+            // ------------------------------------------------------------------------
 
             serverCommands();
         } catch (IOException ex) {
