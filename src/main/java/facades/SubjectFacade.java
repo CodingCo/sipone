@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import model.ElectiveCourse;
 import webInterface.SubjectFacadeIF;
-import webServer.Factory;
 
 public class SubjectFacade implements SubjectFacadeIF {
 
@@ -29,7 +28,6 @@ public class SubjectFacade implements SubjectFacadeIF {
                 courseToReturn.add(course.get(i));
             }
         }
-        System.out.println("Size of courses: " + course.size());
 
         return gson.toJson(courseToReturn);
     }
