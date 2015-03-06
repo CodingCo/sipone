@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import webInterface.SubjectFacadeIF;
+import webServer.Factory;
 
 /**
  *
@@ -24,10 +25,10 @@ public class SubmitHandler implements HttpHandler {
     private String response;
     private int statusCode;
 
-    public SubmitHandler(Gson transformer, ServerResponse sr) {
+    public SubmitHandler(Gson transformer, ServerResponse sr, SubjectFacadeIF facade) {
         this.transformer = transformer;
         this.sr = sr;
-        this.sF = new SubjectFacade();
+        this.sF = facade;
     }
 
     @Override

@@ -12,8 +12,10 @@ import com.google.gson.GsonBuilder;
 import handlers.FileHandler;
 import handlers.SubjectHandler;
 import handlers.ServerResponse;
+import handlers.SubmitHandler;
 import java.util.Properties;
 import utility.Utility;
+import webInterface.SubjectFacadeIF;
 
 public class Server {
 
@@ -26,10 +28,13 @@ public class Server {
     private Gson transformer;
     private int port;
     private String ip;
+    
+    private SubjectFacadeIF facade;
 
     
     // Constructor
-    public Server() throws IOException {
+    public Server(SubjectFacadeIF facade) throws IOException {
+        this.facade = facade;
         gsonBuilder = new GsonBuilder();
         transformer = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
         // Instantiate handler here >>
@@ -44,8 +49,8 @@ public class Server {
         server = HttpServer.create(new InetSocketAddress(ip, port), 0);
         // insert createContext paths here
         server.createContext("/", new FileHandler());
-        //server.createContext("/api/submit", new SubmitHandler());
-        server.createContext("/api/subject", new SubjectHandler(transformer, sr));
+        server.createContext("/api/submit", new SubmitHandler(transformer, sr, facade));
+        server.createContext("/api/subject", new SubjectHandler(transformer, sr, facade));
         server.setExecutor(null);
         server.start();
         System.out.println("Server startet on: " + server.getAddress());

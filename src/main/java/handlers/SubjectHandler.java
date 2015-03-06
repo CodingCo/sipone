@@ -7,6 +7,7 @@ import facades.SubjectFacade;
 import java.io.IOException;
 import java.io.OutputStream;
 import webInterface.SubjectFacadeIF;
+import webServer.Factory;
 
 public class SubjectHandler implements HttpHandler {
 
@@ -18,10 +19,10 @@ public class SubjectHandler implements HttpHandler {
     private String response;
     private int statusCode;
 
-    public SubjectHandler(Gson transformer, ServerResponse sr) {
+    public SubjectHandler(Gson transformer, ServerResponse sr, SubjectFacadeIF facade) {
         this.transformer = transformer;
         this.sr = sr;
-        this.sF = new SubjectFacade();
+        this.sF = facade;
     }
 
     @Override
@@ -50,12 +51,15 @@ public class SubjectHandler implements HttpHandler {
         switch (method) {
             
             case "GET":
-                
+                System.out.println("Inside Get");
                 String electiveSubject = this.sF.getFirstElectiveSubjects();
-
+                System.out.println(electiveSubject
+                );
+                
+                
                 he.sendResponseHeaders(200, electiveSubject.length());
                 try (OutputStream os = he.getResponseBody()) {
-                    os.write(response.getBytes());
+                    os.write(electiveSubject.getBytes());
                 }
                 
                 break;

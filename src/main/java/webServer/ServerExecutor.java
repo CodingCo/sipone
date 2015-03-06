@@ -18,24 +18,19 @@ public class ServerExecutor {
 
     public static void main(String[] args) {
         try {
-            webServer = new Server();
+            EntityManager em = Factory.getInstance().getManager(); // manager
+             SubjectFacadeIF facade = new SubjectFacade(new Gson(), em);
+            webServer = new Server(facade);
             webServer.start();
 
             // ------------------------------------------------------------------------
             System.out.println("Entering area 51");
-            EntityManager em = Factory.getInstance().getManager(); // manager
-            SubjectFacadeIF facade = new SubjectFacade(new Gson(), em);
-
-            // Methods calls
-            String foo = facade.getFirstElectiveSubjects();
+            
             
 //            em.getTransaction().begin();
 //            em.persist(new ElectiveCourse("C#", "description", "A", 1));
 //            em.getTransaction().commit();
 //            em.close();
-            
-            
-            System.out.println("------------------> Data: " + foo);
             
             
             System.out.println("Leaving area 51");
