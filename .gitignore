@@ -8,3 +8,5 @@ nbproject/private/
 build/
 dist/
 /src/META-INF/
+public/vendor/
+public/.idea/
