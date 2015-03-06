@@ -65,7 +65,24 @@
         };
 
         $scope.submit = function () {
-            toastr.success("Submitted");
+            if ($scope.selectedItems.first.length == 2 && $scope.selectedItems.second.length == 2) {
+                //serverFactory.submitSubjects($scope.selectedItems, function (err, data) {
+                //    if (err) {
+                //        toastr.warning("Something went wrong");
+                //        return;
+                //    }
+                //    toastr.success("you chose: " + data);
+                //});
+
+                toastr.success("Well chosen");
+                $scope.selectedItems = {
+                    first: [],
+                    second: []
+                };
+
+            } else {
+                toastr.warning("you must select 2 first, and 2 second priorities");
+            }
         }
 
     }]);
