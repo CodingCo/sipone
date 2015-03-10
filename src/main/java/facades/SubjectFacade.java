@@ -11,11 +11,9 @@ import webServer.Factory;
 public class SubjectFacade implements SubjectFacadeIF {
 
     private Gson gson;
-    private EntityManager emTemp;
 
-    public SubjectFacade(Gson gson, EntityManager em) {
+    public SubjectFacade(Gson gson) {
         this.gson = gson;
-        this.emTemp = em;
     }
 
     @Override

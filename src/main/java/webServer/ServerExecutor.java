@@ -18,14 +18,13 @@ public class ServerExecutor {
 
     public static void main(String[] args) {
         try {
-            EntityManager em = Factory.getInstance().getManager(); // manager
-            SubjectFacadeIF facade = new SubjectFacade(new Gson(), em);
+            SubjectFacadeIF facade = new SubjectFacade(new Gson());
             webServer = new Server(facade);
             webServer.start();
 
             // ------------------------------------------------------------------
             System.out.println("Entering area 51");
-            ElectiveCourse course = new ElectiveCourse("MobileApps", "Desc", "A", 1);
+            ElectiveCourse course = new ElectiveCourse("AI/Algorithms", "Desc", "B", 1);
             String bar = new Gson().toJson(course);
             
             facade.submittedFirstElectiveSubjects(bar);
@@ -33,7 +32,6 @@ public class ServerExecutor {
             
             
             String foo = facade.getFirstElectiveSubjects();
-            foo = facade.getFirstElectiveSubjects();
             System.out.println("Data: " + foo);
             
             
