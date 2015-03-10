@@ -23,6 +23,22 @@ public class ServerExecutor {
             webServer = new Server(facade);
             webServer.start();
 
+            // ------------------------------------------------------------------
+            System.out.println("Entering area 51");
+            ElectiveCourse course = new ElectiveCourse("MobileApps", "Desc", "A", 1);
+            String bar = new Gson().toJson(course);
+            
+            facade.submittedFirstElectiveSubjects(bar);
+            
+            
+            
+            String foo = facade.getFirstElectiveSubjects();
+            foo = facade.getFirstElectiveSubjects();
+            System.out.println("Data: " + foo);
+            
+            
+            System.out.println("Leaving area 51");
+            // ------------------------------------------------------------------
             
 
             serverCommands();

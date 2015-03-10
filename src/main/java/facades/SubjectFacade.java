@@ -6,19 +6,21 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import model.ElectiveCourse;
 import webInterface.SubjectFacadeIF;
+import webServer.Factory;
 
 public class SubjectFacade implements SubjectFacadeIF {
 
     private Gson gson;
-    private EntityManager em;
+    private EntityManager emTemp;
 
     public SubjectFacade(Gson gson, EntityManager em) {
         this.gson = gson;
-        this.em = em;
+        this.emTemp = em;
     }
 
     @Override
     public String getFirstElectiveSubjects() {
+        EntityManager em = Factory.getInstance().getManager();
         List<ElectiveCourse> course = em.createQuery("SELECT e FROM ElectiveCourse e").getResultList();
         List<ElectiveCourse> courseToReturn = new ArrayList();
 
@@ -28,14 +30,16 @@ public class SubjectFacade implements SubjectFacadeIF {
                 courseToReturn.add(course.get(i));
             }
         }
-
+        em.close();
         return gson.toJson(courseToReturn);
     }
 
     @Override
     public String submittedFirstElectiveSubjects(String subjectAsJson) {
+        EntityManager em = Factory.getInstance().getManager();
         ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
-
+        
+        
         try {
             em.getTransaction().begin();
             em.persist(courseToCreate);
@@ -46,6 +50,8 @@ public class SubjectFacade implements SubjectFacadeIF {
                     + "  err: true,\n"
                     + "  title: “Elective course already exists!”\n"
                     + "}";
+        }finally{
+            em.close();
         }
 
         return gson.toJson(courseToCreate);
