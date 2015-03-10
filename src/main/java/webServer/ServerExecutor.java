@@ -18,14 +18,14 @@ public class ServerExecutor {
 
     public static void main(String[] args) {
         try {
-            EntityManager em = Factory.getInstance().getManager(); // manager
-            SubjectFacadeIF facade = new SubjectFacade(new Gson(), em);
+            SubjectFacadeIF facade = new SubjectFacade(new Gson());
             webServer = new Server(facade);
             webServer.start();
-
+            
             // ------------------------------------------------------------------------
             
             // ------------------------------------------------------------------------
+
             
 
             serverCommands();
