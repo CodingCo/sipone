@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import model.ElectiveCourse;
 import webInterface.SubjectFacadeIF;
 
 public class ServerExecutor {
@@ -18,14 +19,11 @@ public class ServerExecutor {
     public static void main(String[] args) {
         try {
             EntityManager em = Factory.getInstance().getManager(); // manager
-             SubjectFacadeIF facade = new SubjectFacade(new Gson(), em);
+            SubjectFacadeIF facade = new SubjectFacade(new Gson(), em);
             webServer = new Server(facade);
             webServer.start();
 
-            // ------------------------------------------------------------------------
-            System.out.println("Entering area 51");
-
-            // ------------------------------------------------------------------------
+            
 
             serverCommands();
         } catch (IOException ex) {

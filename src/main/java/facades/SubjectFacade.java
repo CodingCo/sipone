@@ -40,7 +40,6 @@ public class SubjectFacade implements SubjectFacadeIF {
             em.getTransaction().begin();
             em.persist(courseToCreate);
             em.getTransaction().commit();
-            em.close();
         } catch (Exception e) {
             System.err.println("Exception was thrown");
             return "{\n"
