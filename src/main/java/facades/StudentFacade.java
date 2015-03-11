@@ -20,7 +20,6 @@ public class StudentFacade implements StudentIF {
     public String getStudents() {
         EntityManager em = Factory.getInstance().getManager();
         List<ElectiveCourse> students = em.createQuery("SELECT s FROM Student s").getResultList();
-    
         em.close();
         return gson.toJson(students);
     }
@@ -56,7 +55,7 @@ public class StudentFacade implements StudentIF {
             System.err.println("Exception was thrown");
             return "{\n"
                     + "  err: true,\n"
-                    + "  title: “Elective course already exists!”\n"
+                    + "  title: “Student already exists!”\n"
                     + "}";
         } finally {
             em.close();
