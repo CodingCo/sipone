@@ -7,7 +7,6 @@
         'App.factories'
     ]);
 
-
     app.config(["$routeProvider", function ($routeProvider) {
 
         $routeProvider.when("/subjectOne", {
@@ -15,7 +14,7 @@
             controller: "FistSelectCtrl"
         }).when("/poolPage", {
             templateUrl: "SPA/views/poolPage.html",
-            controller: ""
+            controller: "poolCtrl"
         }).otherwise({
             templateUrl: "SPA/views/frontpage.html",
             controller: "StandardCtrl"

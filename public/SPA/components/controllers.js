@@ -94,7 +94,49 @@
     }]);
 
     app.controller("poolCtrl", ["$scope", "toastr", function ($scope, toastr) {
-        $scope.subjects = [];
+
+        $scope.subjects = ["Algorithms", "AI", "Gaming", "C#", "C++", "Android", "arduino", "System architecture", "SIP"];
+
+        $scope.enabled = function (item) {
+            return item === "AI";
+        };
+
+        $scope.disable = function (item) {
+
+            
+        };
+
+        $scope.data = {
+            happy: 17,
+            borderline: 32,
+            angry: 5
+        };
+
+
+        var data = {
+            labels: ["Happy", "Borderline", "Angry"],
+            datasets: [
+                {
+                    label: "Hello",
+                    fillColor: "rgba(151,187,205,0.5)",
+                    strokeColor: "rgba(151,187,205,0.8)",
+                    highlightFill: "rgba(151,187,205,0.75)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: [$scope.data.happy, $scope.data.borderline, $scope.data.angry]
+                }
+            ]
+        };
+
+        var options = {
+            scaleBeginAtZero: true,
+            scaleShowGridLines: true,
+            scaleGridLineColor: "rgba(0,0,0,.05)"
+        };
+
+
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myBarChart = new Chart(ctx).Bar(data, options);
+
     }]);
 
 })();

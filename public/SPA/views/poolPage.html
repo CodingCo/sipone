@@ -1,3 +1,80 @@
 <div class="container">
-    <p class="lead">hello world</p>
+    <h1 class="text-center">Drooling tool</h1>
+    <hr/>
+    <div class="row">
+        <div class="col-md-7">
+
+
+            <p class="lead">Manually click the elective subjects to mark them in each pool. Click on the flash to make
+                the program calculate the optimum happyness for you</p>
+            <ul>
+                <li class="lead">The same item can only exist in one pool</li>
+                <li class="lead"><span class="glyphicon glyphicon-flash"></span> Can be wrongful in it's calculations
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-5">
+            <p class="lead">Satisfaction</p>
+            <canvas id="myChart" height="200"></canvas>
+            <br/>
+
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group">
+                    <button class="btn btn-default btn-lg"><span class="glyphicon glyphicon-flash"></span></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--
+    <div class="col-md-5">
+        <table class="table table-striped">
+            <tr>
+                <th>Happy</th>
+                <th>Borderline</th>
+                <th>Angry</th>
+            </tr>
+            <tr>
+                <td>{{data.happy}}</td>
+                <td>{{data.borderline}}</td>
+                <td>{{data.angry}}</td>
+            </tr>
+        </table>
+    </div> -->
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="lead">Pool A</p>
+
+            <div class="list-group">
+                <a href="" class="list-group-item"
+                   ng-class="{'list-group-item-success': enabled(item), 'list-group-item-danger': disabled()}"
+                   ng-repeat="item in subjects">
+
+                    <h4 class="list-group-item-heading">{{item}}
+                        <span class="glyphicon glyphicon-ok pull-right" ng-show="enabled(item)"></span>
+                        <span class="glyphicon glyphicon-remove pull-right" ng-show="disabled(item)"></span>
+                    </h4>
+
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <p class="lead">Pool B</p>
+
+            <div class="list-group">
+                <a href="" class="list-group-item" ng-repeat="item in subjects">
+                    <h4 class="list-group-item-heading">{{item}}</h4>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <button class=" btn btn-success btn-lg">Submit selections</button>
+            <button class=" btn btn-warning btn-lg">Clear Selections</button>
+        </div>
+    </div>
+    <hr/>
 </div>
