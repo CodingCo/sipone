@@ -101,9 +101,9 @@
             return item === "AI";
         };
 
-        $scope.disable = function (item) {
+        $scope.disabled = function (item) {
+            return item === "Gaming"
 
-            
         };
 
         $scope.data = {
