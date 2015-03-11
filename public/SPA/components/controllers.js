@@ -93,5 +93,8 @@
 
     }]);
 
+    app.controller("poolCtrl", ["$scope", "toastr", function ($scope, toastr) {
+        $scope.subjects = [];
+    }]);
 
 })();

@@ -13,6 +13,9 @@
         $routeProvider.when("/subjectOne", {
             templateUrl: "SPA/views/subjectOne.html",
             controller: "FistSelectCtrl"
+        }).when("/poolPage", {
+            templateUrl: "SPA/views/poolPage.html",
+            controller: ""
         }).otherwise({
             templateUrl: "SPA/views/frontpage.html",
             controller: "StandardCtrl"
