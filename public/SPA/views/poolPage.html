@@ -37,11 +37,12 @@
 
             <div class="list-group">
                 <a href="" class="list-group-item"
-                   ng-class="{'list-group-item-success': enabled(item), 'list-group-item-danger': disabled(item)}"
-                   ng-repeat="item in subjects">
+                   ng-class="{'list-group-item-success': enabled(item,'A'), 'list-group-item-danger': disabled(item,'A')}"
+                   ng-repeat="item in poolA"
+                   ng-click="activate(item,'A')">
                     <h4 class="list-group-item-heading">{{item}}
-                        <span class="glyphicon glyphicon-ok pull-right" ng-show="enabled(item)"></span>
-                        <span class="glyphicon glyphicon-remove pull-right" ng-show="disabled(item)"></span>
+                        <span class="glyphicon glyphicon-ok pull-right" ng-show="enabled(item, 'A')"></span>
+                        <span class="glyphicon glyphicon-remove pull-right" ng-show="disabled(item,'A')"></span>
                     </h4>
                 </a>
             </div>
@@ -50,8 +51,14 @@
             <p class="lead">Pool B</p>
 
             <div class="list-group">
-                <a href="" class="list-group-item" ng-repeat="item in subjects">
-                    <h4 class="list-group-item-heading">{{item}}</h4>
+                <a href="" class="list-group-item"
+                   ng-class="{'list-group-item-success': enabled(item,'B'), 'list-group-item-danger': disabled(item,'B')}"
+                   ng-repeat="item in poolB"
+                   ng-click="activate(item,'B')">
+                    <h4 class="list-group-item-heading">{{item}}
+                        <span class="glyphicon glyphicon-ok pull-right" ng-show="enabled(item,'B')"></span>
+                        <span class="glyphicon glyphicon-remove pull-right" ng-show="disabled(item,'B')"></span>
+                    </h4>
                 </a>
             </div>
         </div>

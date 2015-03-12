@@ -95,15 +95,68 @@
 
     app.controller("poolCtrl", ["$scope", "toastr", function ($scope, toastr) {
 
-        $scope.subjects = ["Algorithms", "AI", "Gaming", "C#", "C++", "Android", "arduino", "System architecture", "SIP"];
+        var subjects = ["Algorithms", "AI", "Gaming", "C#", "C++", "Android", "arduino", "System architecture", "SIP"];
 
-        $scope.enabled = function (item) {
-            return item === "AI";
+        $scope.poolA = subjects.slice(0);
+        $scope.poolB = subjects.slice(0);
+
+
+        $scope.ch = {
+            A: ["A"],
+            B: ["B"]
         };
 
-        $scope.disabled = function (item) {
-            return item === "Gaming"
+        $scope.chosenA = [];
+        $scope.chosenB = [];
 
+        $scope.activate = function (item, pool) {
+            if (pool === "A") {
+                if ($scope.chosenA.indexOf(item) == -1) {
+                    $scope.chosenA.push(item);
+                    if ($scope.chosenB.indexOf(item) != -1) {
+                        $scope.chosenB.splice($scope.chosenB.indexOf(item), 1);
+                    }
+                } else if ($scope.chosenA.indexOf(item) != -1) {
+                    $scope.chosenA.splice($scope.chosenA.indexOf(item), 1);
+                }
+            }
+            if (pool === "B") {
+                if ($scope.chosenB.indexOf(item) == -1) {
+                    $scope.chosenB.push(item);
+                    if ($scope.chosenA.indexOf(item) != -1) {
+                        $scope.chosenA.splice($scope.chosenA.indexOf(item), 1);
+                    }
+                } else if ($scope.chosenB.indexOf(item) != -1) {
+                    $scope.chosenB.splice($scope.chosenA.indexOf(item), 1);
+                }
+            }
+        };
+
+        $scope.enabled = function (item, pool) {
+            if (pool === "A") {
+                if ($scope.chosenA.indexOf(item) != -1) {
+                    return true;
+                }
+            }
+            if (pool === "B") {
+                if ($scope.chosenB.indexOf(item) != -1) {
+                    return true;
+                }
+            }
+        };
+
+
+        $scope.disabled = function (item, pool) {
+            if (pool === "B") {
+                if ($scope.chosenA.indexOf(item) != -1 && $scope.chosenB.indexOf(item) == -1) {
+                    return true;
+                }
+            }
+            if (pool === "A") {
+                if ($scope.chosenB.indexOf(item) != -1 && $scope.chosenA.indexOf(item) == -1) {
+                    return true;
+                }
+            }
         };
 
         $scope.data = {
@@ -137,6 +190,8 @@
         var ctx = document.getElementById("myChart").getContext("2d");
         var myBarChart = new Chart(ctx).Bar(data, options);
 
-    }]);
+    }
+    ])
+    ;
 
 })();
