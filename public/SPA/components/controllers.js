@@ -100,60 +100,43 @@
         $scope.poolA = subjects.slice(0);
         $scope.poolB = subjects.slice(0);
 
-
-        $scope.ch = {
+        $scope.chosen = {
             A: ["A"],
             B: ["B"]
         };
 
-        $scope.chosenA = [];
-        $scope.chosenB = [];
-
         $scope.activate = function (item, pool) {
-            if (pool === "A") {
-                if ($scope.chosenA.indexOf(item) == -1) {
-                    $scope.chosenA.push(item);
-                    if ($scope.chosenB.indexOf(item) != -1) {
-                        $scope.chosenB.splice($scope.chosenB.indexOf(item), 1);
+            if ($scope.chosen[pool].indexOf(item) == -1) {
+                $scope.chosen[pool].push(item);
+
+                if (pool === "A") {
+                    if ($scope.chosen['B'].indexOf(item) != -1) {
+                        $scope.chosen['B'].splice($scope.chosen['B'].indexOf(item), 1);
                     }
-                } else if ($scope.chosenA.indexOf(item) != -1) {
-                    $scope.chosenA.splice($scope.chosenA.indexOf(item), 1);
-                }
-            }
-            if (pool === "B") {
-                if ($scope.chosenB.indexOf(item) == -1) {
-                    $scope.chosenB.push(item);
-                    if ($scope.chosenA.indexOf(item) != -1) {
-                        $scope.chosenA.splice($scope.chosenA.indexOf(item), 1);
+                } else {
+                    if ($scope.chosen['A'].indexOf(item) != -1) {
+                        $scope.chosen['A'].splice($scope.chosen['A'].indexOf(item), 1);
                     }
-                } else if ($scope.chosenB.indexOf(item) != -1) {
-                    $scope.chosenB.splice($scope.chosenA.indexOf(item), 1);
                 }
+            } else if ($scope.chosen[pool].indexOf(item) != -1) {
+                $scope.chosen[pool].splice($scope.chosen[pool].indexOf(item), 1);
             }
         };
 
         $scope.enabled = function (item, pool) {
-            if (pool === "A") {
-                if ($scope.chosenA.indexOf(item) != -1) {
-                    return true;
-                }
-            }
-            if (pool === "B") {
-                if ($scope.chosenB.indexOf(item) != -1) {
-                    return true;
-                }
+            if ($scope.chosen[pool].indexOf(item) != -1) {
+                return true;
             }
         };
 
 
         $scope.disabled = function (item, pool) {
             if (pool === "B") {
-                if ($scope.chosenA.indexOf(item) != -1 && $scope.chosenB.indexOf(item) == -1) {
+                if ($scope.chosen['A'].indexOf(item) != -1 && $scope.chosen[pool].indexOf(item) == -1) {
                     return true;
                 }
-            }
-            if (pool === "A") {
-                if ($scope.chosenB.indexOf(item) != -1 && $scope.chosenA.indexOf(item) == -1) {
+            } else {
+                if ($scope.chosen['B'].indexOf(item) != -1 && $scope.chosen[pool].indexOf(item) == -1) {
                     return true;
                 }
             }
