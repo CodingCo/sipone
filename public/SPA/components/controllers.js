@@ -129,7 +129,6 @@
             }
         };
 
-
         $scope.disabled = function (item, pool) {
             if (pool === "B") {
                 if ($scope.chosen['A'].indexOf(item) != -1 && $scope.chosen[pool].indexOf(item) == -1) {
@@ -140,6 +139,11 @@
                     return true;
                 }
             }
+        };
+
+        $scope.clearSelections = function () {
+            $scope.chosen['A'] = [];
+            $scope.chosen['B'] = [];
         };
 
         $scope.data = {
