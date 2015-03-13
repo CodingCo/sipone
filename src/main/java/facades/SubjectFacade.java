@@ -34,7 +34,7 @@ public class SubjectFacade implements SubjectFacadeIF {
     }
 
     @Override
-    public String submittedFirstElectiveSubjects(String subjectAsJson) {
+    public String submitElectiveSubject(String subjectAsJson) {
         EntityManager em = Factory.getInstance().getManager();
         ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
 
@@ -79,6 +79,11 @@ public class SubjectFacade implements SubjectFacadeIF {
         em.remove(electiveCourse);
         em.getTransaction().commit();
         return gson.toJson(electiveCourse);
+    }
+
+    @Override
+    public String emptyTable() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

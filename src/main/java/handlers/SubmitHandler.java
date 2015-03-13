@@ -76,7 +76,7 @@ public class SubmitHandler implements HttpHandler {
 
                 String submittedJsonString = buf.toString();
 
-                sF.submittedFirstElectiveSubjects(submittedJsonString);
+                sF.submitElectiveSubject(submittedJsonString);
 
                 break;
 

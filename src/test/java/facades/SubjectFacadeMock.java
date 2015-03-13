@@ -18,42 +18,42 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
         gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
     }
-    
+
     @Override
     public String getFirstElectiveSubjects() {
         List<ElectiveCourse> tmp = new ArrayList<ElectiveCourse>();
-        
+
         for (ElectiveCourse tmpCourse : tmp) {
             if (tmpCourse.getRound() == 1) {
-                
+
                 tmp.add(tmpCourse);
-                
+
             }
         }
-        
+
         return gson.toJson(tmp);
     }
 
     @Override
     public String getSecondElectiveSubjects() {
-           List<ElectiveCourse> tmp = new ArrayList<ElectiveCourse>();
-        
+        List<ElectiveCourse> tmp = new ArrayList<ElectiveCourse>();
+
         for (ElectiveCourse tmpCourse : tmp) {
             if (tmpCourse.getRound() == 2) {
-                
+
                 tmp.add(tmpCourse);
-                
+
             }
         }
-        
+
         return gson.toJson(tmp);
     }
 
     @Override
-    public String submittedFirstElectiveSubjects(String subjectAsJson) {
-       ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
-       subjects.add(courseToCreate);
-       return gson.toJson(courseToCreate);
+    public String submitElectiveSubject(String subjectAsJson) {
+        ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
+        subjects.add(courseToCreate);
+        return gson.toJson(courseToCreate);
     }
 
     @Override
@@ -62,7 +62,24 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
             if (subject.getId() == id) {
                 return gson.toJson(subjects.remove(subject));
             }
-        } 
-        return "";   
+        }
+        return "";
+    }
+
+    @Override
+    public String emptyTable() {
+        try {
+            subjects.clear();
+        } catch (UnsupportedOperationException ex) {
+            System.err.println("Exception was thrown");
+            return "{\n"
+                    + "  err: true,\n"
+                    + "  title: “Couldn't clear table!”\n"
+                    + "}";
+        }
+        return "{\n"
+                + "  err: false,\n"
+                + "  title: “Table cleared”\n"
+                + "}";
     }
 }
