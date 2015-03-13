@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import model.ElectiveCourse;
+import model.Person;
 import webInterface.SubjectFacadeIF;
 import webServer.Factory;
 
@@ -69,4 +70,16 @@ public class SubjectFacade implements SubjectFacadeIF {
         em.close();
         return gson.toJson(courseToReturn);
     }
+
+    @Override
+    public String deleteElectiveSubject(long id) {
+        EntityManager em = Factory.getInstance().getManager();
+        em.getTransaction().begin();
+        ElectiveCourse electiveCourse = em.find(ElectiveCourse.class, id);
+        em.remove(electiveCourse);
+        em.getTransaction().commit();
+        return gson.toJson(electiveCourse);
+    }
+    
+    
 }
