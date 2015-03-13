@@ -96,6 +96,57 @@
     app.controller("poolCtrl", ["$scope", "toastr", function ($scope, toastr) {
 
         var subjects = ["Algorithms", "AI", "Gaming", "C#", "C++", "Android", "arduino", "System architecture", "SIP"];
+        var newSubject = [
+            {
+                title: "Algorithms",
+                first: 10,
+                second: 5
+            },
+            {
+                title: "AI",
+                first: 7,
+                second: 2
+            },
+            {
+                title: "Gaming",
+                first: 14,
+                second: 8
+            },
+            {
+                title: "C#",
+                first: 11,
+                second: 2
+            },
+            {
+                title: "C++",
+                first: 2,
+                second: 7
+            },
+            {
+                title: "Android",
+                first: 21,
+                second: 16
+            },
+            {
+                title: "Arduino",
+                first: 1,
+                second: 0
+            },
+            {
+                title: "System architecture",
+                first: 9,
+                second: 9
+            },
+            {
+                title: "System architecture",
+                first: 13,
+                second: 5
+            }
+        ];
+
+
+
+
 
         $scope.poolA = subjects.slice(0);
         $scope.poolB = subjects.slice(0);
