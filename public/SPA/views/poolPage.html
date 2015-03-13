@@ -21,7 +21,7 @@
 
             <div class="btn-group btn-group-justified">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-lg">
+                    <button type="button" class="btn btn-default btn-lg" ng-click="flashTool()">
                         <span class="glyphicon glyphicon-flash"></span>
                     </button>
                 </div>
@@ -67,7 +67,7 @@
     <!-- BUTTONS -->
     <div class="row">
         <div class="col-md-8">
-            <button class=" btn btn-success btn-lg">Submit selections</button>
+            <button class=" btn btn-success btn-lg" ng-click="submitSelections()">Submit selections</button>
             <button class=" btn btn-warning btn-lg" ng-click="clearSelections()">Clear Selections</button>
         </div>
     </div>

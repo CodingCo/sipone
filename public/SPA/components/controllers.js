@@ -195,6 +195,17 @@
         $scope.clearSelections = function () {
             $scope.chosen['A'] = [];
             $scope.chosen['B'] = [];
+            toastr.info("Poolboy cleaned your pools")
+        };
+
+        $scope.submitSelections = function () {
+            $scope.chosen['A'] = [];
+            $scope.chosen['B'] = [];
+            toastr.success("A lot of people are now happy")
+        };
+
+        $scope.flashTool = function () {
+          toastr.warning("The flash has not yet reached this destination");
         };
 
         $scope.data = {
