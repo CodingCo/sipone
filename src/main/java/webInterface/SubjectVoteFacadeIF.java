@@ -1,6 +1,6 @@
 package webInterface;
 
-public interface SubjectVoteIF {
+public interface SubjectVoteFacadeIF {
  
     public String getSubjectVotes();
     
