@@ -16,17 +16,16 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
     public SubjectFacadeMock() {
         this.subjects = new ArrayList<ElectiveCourse>();
         gsonBuilder = new GsonBuilder();
-        gson = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
+        gson = gsonBuilder.create();
     }
 
     @Override
     public String getFirstElectiveSubjects() {
         List<ElectiveCourse> tmp = new ArrayList<ElectiveCourse>();
 
-        for (ElectiveCourse tmpCourse : tmp) {
-            if (tmpCourse.getRound() == 1) {
-
-                tmp.add(tmpCourse);
+        for (ElectiveCourse current : subjects) {
+            if (current.getRound() == 1) {
+                tmp.add(current);
 
             }
         }
@@ -38,10 +37,10 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
     public String getSecondElectiveSubjects() {
         List<ElectiveCourse> tmp = new ArrayList<ElectiveCourse>();
 
-        for (ElectiveCourse tmpCourse : tmp) {
-            if (tmpCourse.getRound() == 2) {
+        for (ElectiveCourse current : subjects) {
+            if (current.getRound() == 2) {
 
-                tmp.add(tmpCourse);
+                tmp.add(current);
 
             }
         }
@@ -52,6 +51,7 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
     @Override
     public String submitElectiveSubject(String subjectAsJson) {
         ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
+        courseToCreate.setId(100000 + subjects.size());
         subjects.add(courseToCreate);
         return gson.toJson(courseToCreate);
     }

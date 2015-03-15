@@ -36,7 +36,7 @@ public class Server {
     public Server(SubjectFacadeIF facade) throws IOException {
         this.facade = facade;
         gsonBuilder = new GsonBuilder();
-        transformer = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
+        transformer = gsonBuilder.create();
         // Instantiate handler here >>
         this.sr = new ServerResponse();
     }

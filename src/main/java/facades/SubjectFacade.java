@@ -37,7 +37,7 @@ public class SubjectFacade implements SubjectFacadeIF {
     public String submitElectiveSubject(String subjectAsJson) {
         EntityManager em = Factory.getInstance().getManager();
         ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
-
+        
         try {
             em.getTransaction().begin();
             em.persist(courseToCreate);
