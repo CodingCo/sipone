@@ -64,14 +64,12 @@ public class SubjectFacadeTest {
         System.out.println("getFirstElectiveSubjects");
         int expLength = 10;
         String result = instance.getFirstElectiveSubjects();
-        System.out.println(result);
         String[] resultsInJson = result.substring(1, result.length()-1).split("},");
         // test number of items
         
         assertEquals(expLength, resultsInJson.length);
         // test each item is from round 1
         for(String current : resultsInJson){
-            System.out.println("yup: " + current);
             current += (current.charAt(current.length()-1) == '}')?"":"}";
             ElectiveCourse temp = gson.fromJson(current, ElectiveCourse.class);
             assertEquals(1, temp.getRound());
@@ -99,7 +97,6 @@ public class SubjectFacadeTest {
         System.out.println("getSecondElectiveSubjects");
         int expLength = 10;
         String result = instance.getSecondElectiveSubjects();
-        System.out.println(result);
         String[] resultsInJson = result.substring(1, result.length()-1).split("},");
         // test number of items
         
