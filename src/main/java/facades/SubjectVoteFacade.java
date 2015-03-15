@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import java.util.List;
 import javax.persistence.EntityManager;
 import model.SubjectVote;
-import webInterface.SubjectVoteIF;
+import webInterface.SubjectVoteFacadeIF;
 import webServer.Factory;
 
-public class SubjectVoteFacade implements SubjectVoteIF {
+public class SubjectVoteFacade implements SubjectVoteFacadeIF {
 
     private Gson gson;
 
@@ -34,6 +34,7 @@ public class SubjectVoteFacade implements SubjectVoteIF {
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println("Exception was thrown");
+            System.out.println("Message: " + e.getMessage());
             return "{\n"
                     + "  err: true,\n"
                     + "  title: “SubjectVote already exists!”\n"
@@ -42,7 +43,7 @@ public class SubjectVoteFacade implements SubjectVoteIF {
             em.close();
         }
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return subjectVoteAsJson;
     }
 
 }
