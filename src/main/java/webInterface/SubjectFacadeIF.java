@@ -2,9 +2,13 @@ package webInterface;
 
 public interface SubjectFacadeIF {
 
+    public String getAll();
+    
     public String getFirstElectiveSubjects();
 
     public String getSecondElectiveSubjects();
+    
+    public String getOne(long id);
     
     public String submitElectiveSubject(String subjectAsJson);
     

@@ -16,6 +16,13 @@ public class SubjectFacade implements SubjectFacadeIF {
     public SubjectFacade(Gson gson) {
         this.gson = gson;
     }
+    
+    @Override
+    public String getAll() {
+        EntityManager em = Factory.getInstance().getManager();
+        List<ElectiveCourse> courses = em.createQuery("SELECT e FROM ElectiveCourse e").getResultList();
+        return gson.toJson(courses);
+    }
 
     @Override
     public String getFirstElectiveSubjects() {
@@ -31,6 +38,11 @@ public class SubjectFacade implements SubjectFacadeIF {
         }
         em.close();
         return gson.toJson(courseToReturn);
+    }
+    
+    @Override 
+    public String getOne(long id){
+        return "";
     }
 
     @Override

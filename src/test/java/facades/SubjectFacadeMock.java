@@ -18,6 +18,11 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
         gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();
     }
+    
+    @Override
+    public String getAll() {
+        return gson.toJson(subjects);
+    }
 
     @Override
     public String getFirstElectiveSubjects() {
@@ -48,6 +53,19 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
         return gson.toJson(tmp);
     }
 
+    @Override 
+    public String getOne(long id){
+        for(ElectiveCourse electiveCourse : subjects){
+            if(electiveCourse.getId() == id){
+                return gson.toJson(electiveCourse);
+            }
+        }
+        return "{\n"
+                    + "  err: true,\n"
+                    + "  title: “Elective Course with id " + id + " doesn't exist!”\n"
+                    + "}";
+    }
+    
     @Override
     public String submitElectiveSubject(String subjectAsJson) {
         ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
@@ -58,12 +76,26 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
 
     @Override
     public String deleteElectiveSubject(long id) {
-        for (ElectiveCourse subject : subjects) {
-            if (subject.getId() == id) {
-                return gson.toJson(subjects.remove(subject));
+        System.out.println("inside  delete elctive subject");
+        for(int i = 0; i < subjects.size(); i++){
+            System.out.println("inside loop ");
+            if(subjects.get(i).getId() == id){
+                System.out.println("inside if ");
+                return gson.toJson(subjects.remove(i));
             }
         }
-        return "";
+        /*for (ElectiveCourse subject : subjects) {
+            System.out.println("inside loop ");
+            if (subject.getId() == id) {
+                System.out.println("inside if ");
+                return gson.toJson(subjects.remove(subject));
+            }
+        }*/
+        System.out.println("after loop");
+        return "{\n"
+                    + "  err: true,\n"
+                    + "  title: “Elective Course with id " + id + " doesn't exist!”\n"
+                    + "}";
     }
 
     @Override
@@ -82,4 +114,5 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
                 + "  title: “Table cleared”\n"
                 + "}";
     }
+
 }
