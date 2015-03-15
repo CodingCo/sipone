@@ -76,22 +76,11 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
 
     @Override
     public String deleteElectiveSubject(long id) {
-        System.out.println("inside  delete elctive subject");
         for(int i = 0; i < subjects.size(); i++){
-            System.out.println("inside loop ");
             if(subjects.get(i).getId() == id){
-                System.out.println("inside if ");
                 return gson.toJson(subjects.remove(i));
             }
         }
-        /*for (ElectiveCourse subject : subjects) {
-            System.out.println("inside loop ");
-            if (subject.getId() == id) {
-                System.out.println("inside if ");
-                return gson.toJson(subjects.remove(subject));
-            }
-        }*/
-        System.out.println("after loop");
         return "{\n"
                     + "  err: true,\n"
                     + "  title: “Elective Course with id " + id + " doesn't exist!”\n"

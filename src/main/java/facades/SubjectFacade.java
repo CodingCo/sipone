@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.RollbackException;
 import model.ElectiveCourse;
-import model.Person;
+import org.omg.CORBA.SystemException;
 import webInterface.SubjectFacadeIF;
 import webServer.Factory;
 
@@ -16,7 +18,7 @@ public class SubjectFacade implements SubjectFacadeIF {
     public SubjectFacade(Gson gson) {
         this.gson = gson;
     }
-    
+
     @Override
     public String getAll() {
         EntityManager em = Factory.getInstance().getManager();
@@ -39,17 +41,25 @@ public class SubjectFacade implements SubjectFacadeIF {
         em.close();
         return gson.toJson(courseToReturn);
     }
-    
-    @Override 
-    public String getOne(long id){
-        return "";
+
+    @Override
+    public String getOne(long id) {
+        EntityManager em = Factory.getInstance().getManager();
+        ElectiveCourse electiveCourse = em.find(ElectiveCourse.class, id);
+        if (electiveCourse != null) {
+            return gson.toJson(electiveCourse);
+        }
+        return "{\n"
+                + "  err: true,\n"
+                + "  title: “Elective Course with id " + id + " doesn't exist!”\n"
+                + "}";
     }
 
     @Override
     public String submitElectiveSubject(String subjectAsJson) {
         EntityManager em = Factory.getInstance().getManager();
         ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
-        
+
         try {
             em.getTransaction().begin();
             em.persist(courseToCreate);
@@ -88,15 +98,39 @@ public class SubjectFacade implements SubjectFacadeIF {
         EntityManager em = Factory.getInstance().getManager();
         em.getTransaction().begin();
         ElectiveCourse electiveCourse = em.find(ElectiveCourse.class, id);
-        em.remove(electiveCourse);
-        em.getTransaction().commit();
-        return gson.toJson(electiveCourse);
+        
+        if (electiveCourse != null) {
+            em.remove(electiveCourse);
+            em.getTransaction().commit();
+            return gson.toJson(electiveCourse);
+        }
+        return "{\n"
+                + "  err: true,\n"
+                + "  title: “Elective Course with id " + id + " doesn't exist!”\n"
+                + "}";
     }
 
     @Override
     public String emptyTable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = Factory.getInstance().getManager();
+
+        try {
+            em.getTransaction().begin();
+            Query q1 = em.createNativeQuery("DELETE FROM ElectiveCourse");
+            q1.executeUpdate();
+            em.getTransaction().commit();
+        } catch (SystemException | SecurityException | IllegalStateException | RollbackException e) {
+            e.printStackTrace();
+            System.err.println("Exception was thrown");
+            return "{\n"
+                    + "  err: true,\n"
+                    + "  title: “Couldn't clear table!”\n"
+                    + "}";
+        }
+        return "{\n"
+                + "  err: false,\n"
+                + "  title: “Table cleared”\n"
+                + "}";
     }
-    
-    
+
 }

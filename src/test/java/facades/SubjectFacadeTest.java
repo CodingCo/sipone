@@ -23,7 +23,7 @@ public class SubjectFacadeTest {
     SubjectFacadeIF instance;
     GsonBuilder gsonBuilder;
     Gson gson;
-    boolean isMock = true;
+    boolean isMock = false;
 
     @Before 
     public void setUp(){
@@ -93,11 +93,9 @@ public class SubjectFacadeTest {
         System.out.println("submittedFirstElectiveSubjects");
         ElectiveCourse expResult = new ElectiveCourse("Elective Course " + 20, "TestDescription nr. " + 20, "1", 1);
         String subjectAsJson = gson.toJson(expResult);
-        expResult.setId(100020);
         ElectiveCourse result = gson.fromJson(instance.submitElectiveSubject(subjectAsJson), ElectiveCourse.class);
         
-        // Asserts all attributes, but creationDate.
-        assertEquals(expResult.getId(), result.getId());
+        // Asserts all attributes, but id and creationDate.
         assertEquals(expResult.getElectiveCourseName(), result.getElectiveCourseName());
         assertEquals(expResult.getDescription(), result.getDescription());
         assertEquals(expResult.getPool(), result.getPool());
@@ -154,7 +152,6 @@ public class SubjectFacadeTest {
         // Succesful delete
         long expResult_1 = 100019L;
         long result_1 = gson.fromJson(instance.deleteElectiveSubject(expResult_1), ElectiveCourse.class).getId();
-        System.out.println("expREsult_1: " + expResult_1 + ", result_1: " + result_1);
         assertEquals(expResult_1, result_1);
         
         String expResult_2 = "{\n"
@@ -162,7 +159,6 @@ public class SubjectFacadeTest {
                     + "  title: “Elective Course with id " + expResult_1 + " doesn't exist!”\n"
                     + "}";
         String result_2 = instance.getOne(expResult_1);
-        System.out.println("result_2: " + result_2);
         assertEquals(expResult_2, result_2);
         //----------------------------------------------------------------------------------------------------------
         // Unsuccesful delete
@@ -172,7 +168,6 @@ public class SubjectFacadeTest {
                     + "  title: “Elective Course with id " + invalidId + " doesn't exist!”\n"
                     + "}";
         String result_3 = instance.deleteElectiveSubject(invalidId);
-        System.out.println("result_3: " + result_3);
         assertEquals(expResult_3, result_3);
     }
     
