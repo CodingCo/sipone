@@ -93,6 +93,10 @@
 
     }]);
 
+    app.controller("LastSelectCtrl",["$scope","toastr", function ($scope, toastr) {
+        $scope.title = "Just a test";
+    }]);
+
     app.controller("poolCtrl", ["$scope", "toastr", function ($scope, toastr) {
 
         var subjects = ["Algorithms", "AI", "Gaming", "C#", "C++", "Android", "arduino", "System architecture", "SIP"];

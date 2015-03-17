@@ -12,6 +12,9 @@
         $routeProvider.when("/subjectOne", {
             templateUrl: "SPA/views/subjectOne.html",
             controller: "FistSelectCtrl"
+        }).when("/subjectLast", {
+            templateUrl: "SPA/views/subjectLast.html",
+            controller: "LastSelectCtrl"
         }).when("/poolPage", {
             templateUrl: "SPA/views/poolPage.html",
             controller: "poolCtrl"
