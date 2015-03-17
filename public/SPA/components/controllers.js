@@ -93,8 +93,38 @@
 
     }]);
 
-    app.controller("LastSelectCtrl",["$scope","toastr", function ($scope, toastr) {
-        $scope.title = "Just a test";
+    app.controller("LastSelectCtrl", ["$scope", "toastr", function ($scope, toastr) {
+        $scope.poolA = ["AI", "C#", "Arduino", "Android"];
+        $scope.poolB = ["Algorithms", "SIP", "Gaming engine", "System architecture"];
+        $scope.selectedItems = {
+            A: [],
+            B: []
+        };
+
+        $scope.select = function (item, pool) {
+            if ($scope.selectedItems[pool].length != 2) {
+                $scope.selectedItems[pool].push(item)
+            }
+        };
+        $scope.removeItem = function (item, pool) {
+            var index = $scope.selectedItems[pool].indexOf(item);
+            if (index != -1) {
+                $scope.selectedItems[pool].splice(index, 1);
+            }
+        };
+
+        $scope.clearSelection = function () {
+            $scope.selectedItems['A'] = [];
+            $scope.selectedItems['B'] = [];
+            toastr.info("Your selections have been cleared");
+        };
+
+        $scope.submitSelection = function () {
+            $scope.selectedItems['A'] = [];
+            $scope.selectedItems['B'] = [];
+            toastr.success("Sucessfuly submitted");
+        }
+
     }]);
 
     app.controller("poolCtrl", ["$scope", "toastr", function ($scope, toastr) {
@@ -147,9 +177,6 @@
                 second: 5
             }
         ];
-
-
-
 
 
         $scope.poolA = subjects.slice(0);
@@ -209,7 +236,7 @@
         };
 
         $scope.flashTool = function () {
-          toastr.warning("The flash has not yet reached this destination");
+            toastr.warning("The flash has not yet reached this destination");
         };
 
         $scope.data = {

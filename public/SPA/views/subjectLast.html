@@ -1,7 +1,88 @@
 <div class="container">
-    <h1>last page</h1>
+    <h1>Last selection round</h1>
 
-    <p>{{title}}</p>
+    <div class="row">
+        <ul>
+            <li class="lead">Choose 1 first priority in each pool</li>
+            <li class="lead">Choose 1 second priority in each pool</li>
+        </ul>
+        <hr/>
+    </div>
+    <div class="row">
+        <!-- POOL A -->
+        <div class="col-md-4">
+            <p class="lead">Pool A</p>
 
+            <div class="list-group">
+                <a href="" class="list-group-item" ng-repeat="item in poolA" ng-click="select(item,'A')">
+                    <h4 class="list-group-item-heading">{{item}}</h4>
+                </a>
+            </div>
+
+        </div>
+        <!-- POOL B -->
+        <div class="col-md-4">
+            <p class="lead">Pool B</p>
+
+            <div class="list-group">
+                <a href="" class="list-group-item" ng-repeat="item in poolB" ng-click="select(item,'B');">
+                    <h4 class="list-group-item-heading">{{item}}</h4>
+                </a>
+            </div>
+        </div>
+        <!-- YOUR SELECTION -->
+        <div class="col-md-4">
+            <p><b>Your selected subjects</b></p>
+
+            <!-- POOL A SELECTION -->
+            <p class="lead">Pool A</p>
+
+            <div class="list-group">
+                <a href="" class="list-group-item list-group-item-success" ng-repeat="item in selectedItems.A"
+                   ng-click="removeItem(item,'A')">
+                    <h4 class="list-group-item-heading">{{item}}</h4>
+                </a>
+                <!-- Dummies -->
+                <a href="" class="list-group-item disabled" ng-show="selectedItems.A[0] == undefined">
+                    <h4 class="list-group-item-heading">1st priority in A</h4>
+                </a>
+                <a href="" class="list-group-item disabled" ng-show="selectedItems.A[1] == undefined">
+                    <h4 class="list-group-item-heading">2nd priority in A</h4>
+                </a>
+                <!-- Dummies end -->
+            </div>
+
+            <!-- POOL B SELECTION -->
+            <p class="lead">Pool B</p>
+
+            <div class="list-group">
+                <a href="" class="list-group-item list-group-item-success" ng-repeat="item in selectedItems.B"
+                   ng-click="removeItem(item,'B')">
+                    <h4 class="list-group-item-heading">{{item}}</h4>
+                </a>
+
+                <!-- Dummies -->
+                <a href="" class="list-group-item disabled" ng-show="selectedItems.B[0] == undefined">
+                    <h4 class="list-group-item-heading">1st priority in B</h4>
+                </a>
+                <a href="" class="list-group-item disabled" ng-show="selectedItems.B[1] == undefined">
+                    <h4 class="list-group-item-heading">2nd priority in B</h4>
+                </a>
+                <!-- Dummies end -->
+            </div>
+            <button class=" btn btn-warning btn-lg" ng-click="clearSelection()">Clear Selections</button>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <!-- SUBMIT BUTTON -->
+        <div class="col-md-6">
+            <p><b>Submit your selection</b></p>
+            <button class=" btn btn-success btn-lg" ng-click="submitSelection()">Submit selections</button>
+        </div>
+        <!-- CLEAR SELECTIONS -->
+
+    </div>
+    <hr/>
 
 </div>
