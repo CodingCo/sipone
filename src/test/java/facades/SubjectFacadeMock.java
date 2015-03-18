@@ -69,7 +69,7 @@ public class SubjectFacadeMock implements SubjectFacadeIF {
     @Override
     public String submitElectiveSubject(String subjectAsJson) {
         ElectiveCourse courseToCreate = gson.fromJson(subjectAsJson, ElectiveCourse.class);
-        courseToCreate.setId(100000 + subjects.size());
+        courseToCreate.setId(100000 + subjects.size()); 
         subjects.add(courseToCreate);
         return gson.toJson(courseToCreate);
     }

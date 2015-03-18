@@ -71,12 +71,20 @@ public class SubjectHandler implements HttpHandler {
     
     private void deleteRequest(HttpExchange he) throws IOException {
         System.out.println("Delete called!");
-        status = 200;
+        response = "{\n"
+                + "err: \"true\",\n"
+                + "msg: \"\"\n"
+                + "}";
+        status = 503;
     }
     
     private void putRequest(HttpExchange he) throws IOException {
         System.out.println("Put called!");
-        status = 200;
+        response = "{\n"
+                + "err: \"true\",\n"
+                + "msg: \"\"\n"
+                + "}";
+        status = 503;
     }
     
     private String readInput(HttpExchange he) throws UnsupportedEncodingException, IOException {

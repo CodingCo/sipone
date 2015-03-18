@@ -71,7 +71,7 @@ public class SubjectVoteHandler implements HttpHandler {
                 + "err: \"true\",\n"
                 + "msg: \"\"\n"
                 + "}";
-        status = 200;
+        status = 503;
     }
 
     private void putRequest(HttpExchange he) throws IOException {
@@ -80,7 +80,7 @@ public class SubjectVoteHandler implements HttpHandler {
                 + "err: \"true\",\n"
                 + "msg: \"\"\n"
                 + "}";
-        status = 200;
+        status = 503;
     }
 
     private String readInput(HttpExchange he) throws UnsupportedEncodingException, IOException {
