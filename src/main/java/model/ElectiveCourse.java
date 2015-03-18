@@ -17,9 +17,8 @@ public class ElectiveCourse implements Serializable {
     @Column(name = "ELECTIVE_COURSE_NAME")
     private String electiveCourseName;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "CREATION_DATE")
-    private Date creationDate;
+    private String creationDate;
 
     @Column(name = "NO_OF_VOTES")
     private int noOfVotes;
@@ -47,13 +46,9 @@ public class ElectiveCourse implements Serializable {
 
     private void setDate() {
 
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
-            String currentDate = sdf.format(new Date());
-            creationDate = sdf.parse(currentDate);
-        } catch (ParseException ex) {
-            System.err.println("PROBLEM IN FORMATTING DATE!!!");
-        }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
+            creationDate = sdf.format(new Date());
+       
 
     }
 
@@ -70,7 +65,7 @@ public class ElectiveCourse implements Serializable {
         this.electiveCourseName = electiveCourseName;
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
@@ -102,13 +97,18 @@ public class ElectiveCourse implements Serializable {
         return id;
     }
 
+    public void setId(long id){
+        this.id = id;
+    }
     public int getRound() {
         return round;
     }
 
     @Override
     public String toString() {
-        return "model.ElectiveCourse[ id=" + id + " ]";
+        return "ElectiveCourse{" + "id=" + id + ", electiveCourseName=" + electiveCourseName + ", creationDate=" + creationDate + ", noOfVotes=" + noOfVotes + ", description=" + description + ", pool=" + pool + ", round=" + round + '}';
     }
+
+    
 
 }

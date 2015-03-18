@@ -1,15 +1,17 @@
 package webServer;
 
 import com.google.gson.Gson;
+import facades.StudentFacade;
 import facades.SubjectFacade;
+import facades.SubjectVoteFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import model.ElectiveCourse;
+import webInterface.StudentIF;
 import webInterface.SubjectFacadeIF;
+import webInterface.SubjectVoteFacadeIF;
 
 public class ServerExecutor {
 
@@ -18,14 +20,15 @@ public class ServerExecutor {
 
     public static void main(String[] args) {
         try {
-            SubjectFacadeIF facade = new SubjectFacade(new Gson());
-            webServer = new Server(facade);
+            SubjectFacadeIF subjectFacade = new SubjectFacade(new Gson());
+            StudentIF studentFacade = new StudentFacade(new Gson());
+            SubjectVoteFacadeIF subjectVoteFacade = new SubjectVoteFacade(new Gson());
+            webServer = new Server();
             webServer.start();
-            
             // ------------------------------------------------------------------------
-            
+            System.out.println("Entering area 51");
+            System.out.println("Leaving area 51");
             // ------------------------------------------------------------------------
-
             
 
             serverCommands();
@@ -51,7 +54,7 @@ public class ServerExecutor {
 
     private static void switchCommands(String command) throws IOException {
 
-        switch (command) {
+        switch (command) { 
             case "stop":
                 webServer.closeHttpServer();
                 System.exit(0);

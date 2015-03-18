@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -14,22 +15,22 @@ public class SubjectVote implements Serializable {
     @OneToOne
     private Student student;
     
-    @OneToOne
-    private ElectiveCourse course;
+    @OneToMany // TODO: Check this
+    private List<ElectiveCourse> course;
 
     public SubjectVote() {
     }
     
-    public SubjectVote(Student student, ElectiveCourse course) {
+    public SubjectVote(Student student, List electiveCourses) {
         this.student = student;
-        this.course = course;
+        this.course = electiveCourses;
     }
 
     public Student getStudent() {
         return student;
     }
 
-    public ElectiveCourse getCourse() {
+    public List getElectivesCourses() {
         return course;
     }
     

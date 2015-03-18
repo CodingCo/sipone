@@ -9,13 +9,17 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import facades.SubjectFacade;
+import facades.SubjectVoteFacade;
 import handlers.FileHandler;
-import handlers.SubjectHandler;
 import handlers.ServerResponse;
-import handlers.SubmitHandler;
+import handlers.SubjectHandler;
 import java.util.Properties;
 import utility.Utility;
 import webInterface.SubjectFacadeIF;
+import webInterface.SubjectVoteFacadeIF;
+import facades.SubjectVoteFacade;
+import handlers.SubjectVoteHandler;
 
 public class Server {
 
@@ -25,18 +29,15 @@ public class Server {
     private final Properties property = Utility.initProperties("serverproperties.txt");
 
     GsonBuilder gsonBuilder;
-    private Gson transformer;
+    private Gson gson;
     private int port;
     private String ip;
-    
-    private SubjectFacadeIF facade;
 
-    
     // Constructor
-    public Server(SubjectFacadeIF facade) throws IOException {
-        this.facade = facade;
+    public Server() throws IOException {
         gsonBuilder = new GsonBuilder();
-        transformer = gsonBuilder.excludeFieldsWithoutExposeAnnotation().create();
+        gson = gsonBuilder.create();
+
         // Instantiate handler here >>
         this.sr = new ServerResponse();
     }
@@ -45,18 +46,19 @@ public class Server {
 
         ip = property.getProperty("ipaddress");
         port = Integer.parseInt(property.getProperty("webport"));
-
         server = HttpServer.create(new InetSocketAddress(ip, port), 0);
-        // insert createContext paths here
+        // HANDLERS BEGIN
         server.createContext("/", new FileHandler());
-        server.createContext("/api/submit", new SubmitHandler(transformer, sr, facade));
-        server.createContext("/api/subject", new SubjectHandler(transformer, sr, facade));
+//      server.createContext("/api/subject", new SubjectHandlerOLD(gson, sr, null)); // TODO: new facade
+        server.createContext("/api/subject", new SubjectHandler(sr, new SubjectFacade(gson)));
+        server.createContext("/api/subjectVote", new SubjectVoteHandler(sr, new SubjectVoteFacade(gson)));
+        // HANDLERS STOP
         server.setExecutor(null);
         server.start();
         System.out.println("Server startet on: " + server.getAddress());
 
     }
-    
+
     public void closeHttpServer() {
         server.stop(2);
         System.out.println("webserver closed");
@@ -67,21 +69,14 @@ public class Server {
 
             @Override
             public void handle(HttpExchange he) throws IOException {
-
                 // Should return index.html
                 String contentType = "text/html";
                 String response = "Server is running!";
-                byte[] bytesToSend = response.getBytes();
-
                 Headers h = he.getResponseHeaders();
                 h.add("Content-Type", contentType);
                 h.add("charset", "UTF-8");
 
-                he.sendResponseHeaders(200, 0);
-                try (OutputStream os = he.getResponseBody()) {
-                    os.write(bytesToSend, 0, bytesToSend.length);
-                }
-
+                sr.sendMessage(he, port, response);
             }
 
         };
