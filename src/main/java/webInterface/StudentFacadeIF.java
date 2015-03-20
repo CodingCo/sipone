@@ -1,6 +1,6 @@
 package webInterface;
 
-public interface StudentIF {
+public interface StudentFacadeIF {
     public String getStudents();
     
     public String getStudent(String cpr);

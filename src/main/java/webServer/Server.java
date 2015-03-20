@@ -9,14 +9,14 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import facades.SubjectFacade;
+import facades.ElectiveCourseFacade;
 import facades.SubjectVoteFacade;
 import handlers.FileHandler;
 import handlers.ServerResponse;
 import handlers.SubjectHandler;
 import java.util.Properties;
 import utility.Utility;
-import webInterface.SubjectFacadeIF;
+import webInterface.ElectiveCourseFacadeIF;
 import webInterface.SubjectVoteFacadeIF;
 import facades.SubjectVoteFacade;
 import handlers.SubjectVoteHandler;
@@ -50,7 +50,7 @@ public class Server {
         // HANDLERS BEGIN
         server.createContext("/", new FileHandler());
 //      server.createContext("/api/subject", new SubjectHandlerOLD(gson, sr, null)); // TODO: new facade
-        server.createContext("/api/subject", new SubjectHandler(sr, new SubjectFacade(gson)));
+        server.createContext("/api/subject", new SubjectHandler(sr, new ElectiveCourseFacade(gson)));
         server.createContext("/api/subjectVote", new SubjectVoteHandler(sr, new SubjectVoteFacade(gson)));
         // HANDLERS STOP
         server.setExecutor(null);

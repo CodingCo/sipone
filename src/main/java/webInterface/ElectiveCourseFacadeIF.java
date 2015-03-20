@@ -1,6 +1,6 @@
 package webInterface;
 
-public interface SubjectFacadeIF {
+public interface ElectiveCourseFacadeIF {
 
     public String getAll();
     

@@ -7,17 +7,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import model.Person;
-import webInterface.SubjectFacadeIF;
+import webInterface.ElectiveCourseFacadeIF;
 
 public class SubjectHandler implements HttpHandler {
     
     private ServerResponse sr;
-    private SubjectFacadeIF facade;
+    private ElectiveCourseFacadeIF facade;
     
     private String response;
     private int status;
     
-    public SubjectHandler(ServerResponse sr, SubjectFacadeIF facade) {
+    public SubjectHandler(ServerResponse sr, ElectiveCourseFacadeIF facade) {
         this.sr = sr;
         this.facade = facade;
     }

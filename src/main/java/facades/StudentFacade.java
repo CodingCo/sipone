@@ -5,10 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import model.ElectiveCourse;
 import model.Student;
-import webInterface.StudentIF;
+import webInterface.StudentFacadeIF;
 import webServer.Factory;
 
-public class StudentFacade implements StudentIF {
+public class StudentFacade implements StudentFacadeIF {
 
     private Gson gson;
 

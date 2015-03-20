@@ -5,15 +5,15 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import model.ElectiveCourse;
-import webInterface.SubjectFacadeIF;
+import webInterface.ElectiveCourseFacadeIF;
 
-public class SubjectFacadeMock implements SubjectFacadeIF {
+public class ElectiveCourseFacadeMock implements ElectiveCourseFacadeIF {
 
     private GsonBuilder gsonBuilder;
     private Gson gson;
     private List<ElectiveCourse> subjects;
 
-    public SubjectFacadeMock() {
+    public ElectiveCourseFacadeMock() {
         this.subjects = new ArrayList<ElectiveCourse>();
         gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();

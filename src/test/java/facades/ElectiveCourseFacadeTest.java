@@ -12,15 +12,15 @@ import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import webInterface.SubjectFacadeIF;
+import webInterface.ElectiveCourseFacadeIF;
 
 /**
  *
  * @author christophermortensen
  */
-public class SubjectFacadeTest {
+public class ElectiveCourseFacadeTest {
     
-    SubjectFacadeIF instance;
+    ElectiveCourseFacadeIF instance;
     GsonBuilder gsonBuilder;
     Gson gson;
     boolean isMock = false;
@@ -30,7 +30,7 @@ public class SubjectFacadeTest {
         gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();
         
-        instance = isMock ? new SubjectFacadeMock() : new SubjectFacade(gson);
+        instance = isMock ? new ElectiveCourseFacadeMock() : new ElectiveCourseFacade(gson);
         addDummyData();
     }
     

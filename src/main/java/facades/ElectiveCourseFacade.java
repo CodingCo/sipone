@@ -8,14 +8,14 @@ import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import model.ElectiveCourse;
 import org.omg.CORBA.SystemException;
-import webInterface.SubjectFacadeIF;
+import webInterface.ElectiveCourseFacadeIF;
 import webServer.Factory;
 
-public class SubjectFacade implements SubjectFacadeIF {
+public class ElectiveCourseFacade implements ElectiveCourseFacadeIF {
 
     private Gson gson;
 
-    public SubjectFacade(Gson gson) {
+    public ElectiveCourseFacade(Gson gson) {
         this.gson = gson;
     }
 

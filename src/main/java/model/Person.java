@@ -12,7 +12,7 @@ public class Person implements Serializable {
     
     @Id
     @Column(name = "CPR_NUMBER", nullable = false)
-    private String cprNummer;
+    private String cprNumber;
     
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
@@ -26,15 +26,15 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String cprNummer, String firstName, String lastName, String email) {
-        this.cprNummer = cprNummer;
+    public Person(String cprNumber, String firstName, String lastName, String email) {
+        this.cprNumber = cprNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    public String getCprNummer() {
-        return cprNummer;
+    public String getCprNumber() {
+        return cprNumber;
     }
 
     public String getFirstName() {
@@ -59,6 +59,10 @@ public class Person implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public void setCprNumber(String cpr){
+        this.cprNumber = cpr;
     }
     
 }

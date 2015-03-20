@@ -2,15 +2,15 @@ package webServer;
 
 import com.google.gson.Gson;
 import facades.StudentFacade;
-import facades.SubjectFacade;
+import facades.ElectiveCourseFacade;
 import facades.SubjectVoteFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import webInterface.StudentIF;
-import webInterface.SubjectFacadeIF;
+import webInterface.StudentFacadeIF;
+import webInterface.ElectiveCourseFacadeIF;
 import webInterface.SubjectVoteFacadeIF;
 
 public class ServerExecutor {
@@ -20,8 +20,8 @@ public class ServerExecutor {
 
     public static void main(String[] args) {
         try {
-            SubjectFacadeIF subjectFacade = new SubjectFacade(new Gson());
-            StudentIF studentFacade = new StudentFacade(new Gson());
+            ElectiveCourseFacadeIF subjectFacade = new ElectiveCourseFacade(new Gson());
+            StudentFacadeIF studentFacade = new StudentFacade(new Gson());
             SubjectVoteFacadeIF subjectVoteFacade = new SubjectVoteFacade(new Gson());
             webServer = new Server();
             webServer.start();
